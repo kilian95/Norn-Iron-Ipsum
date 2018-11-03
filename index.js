@@ -2,6 +2,17 @@ $(function() {
   
 	var words = ['bake', 'banjaxed', 'banter', 'beezer', 'big lad', 'bout ye', 'catch yourself on,', 'cracker', 'craic', 'dander', 'dead on', 'eejit', 'faffin', 'fegs', 'grand', 'kex', 'melter', 'munter', 'mucker', 'offie', 'oul-doll', 'peelers', 'ratten', 'spuds', 'steamin', 'wee', 'what about ye,', 'wind yer neck in,', 'ats me nai', 'buck eejit', 'gurn', 'yoke', 'foundered', 'quare stretch in the evenings hi,', 'whats the craic', 'yer da sells avon', 'yer mas your da', 'swall', 'you know yourself,', 'sucking diesel', 'boyo', 'chancer', 'culchie', 'gaff', 'keep er lit,'];
 
+	$("#generate").click(function() {
+		var paragraphs = $("#paragraphs").val();
+
+		// Remove existing paragraphs
+		$('#output').empty();
+
+		for (var i = 0; i < paragraphs; i++) {
+			generateParagraph();
+		}
+	});
+
 	// Return random number
 	function getSentenceLength() {
 		var min = 3;
@@ -13,11 +24,10 @@ $(function() {
 		words.sort(function() { return 0.5 - Math.random() });
 	}
 
-	function generateSentences() {
+	function generateParagraph() {
 		var index = 0;
 		randomizeArray();
 
-		
 		// Add grammar to each sentence
 		for (i = 0; i < words.length; i += sentenceLength) {
 
@@ -28,22 +38,36 @@ $(function() {
     	addFullStops(words, index);
     	addCapitalLetters(words, index);
     	    	
-			// TODO
-			// Remove full stops that appear after commas.
-
-			// TODO
-			// Add paragraphs
-
 		}  
 
-		// Add full stop to last word
-		var lastWord = words[words.length-1].toString().concat(".");
-   	words[words.length-1] = lastWord;
-
+		addFullStopLastWord(words);
+		
 		// Join contents of array into string
-		var sentence = words.join(' ');
+		var paragraph = words.join(' ');
 
-		console.log(sentence);
+
+		$('#output').append('<p>' + paragraph + '</p>');
+
+		
+	}
+
+
+	function addFullStopLastWord(words) {
+
+		var lastWord = words[words.length-1].toString();
+
+		if (lastWord.includes(',')) {
+			lastWord = lastWord.replace(',', '.');
+		}
+		else {
+			lastWord = lastWord.concat('.');
+
+			// Remove double full stop from last word when it appears
+			if (lastWord.includes('..')) {
+				lastWord = lastWord.replace('..', '.');
+			}
+		}
+   	words[words.length-1] = lastWord;
 	}
 
 
@@ -51,7 +75,15 @@ $(function() {
 		// Add full stops
   	// Get last word of sentence and convert to string. Make sure word exists
   	if (words[index]) {
-  		var endSentence = words[index].toString().concat(".");
+  		var endSentence = words[index].toString();
+
+  		// If the last word has a comma replace it with a full stop
+  		if (endSentence.includes(',')) {
+  			endSentence = endSentence.replace(',', '.');  // Change to regex
+  		}
+  		else {
+  			endsentence = endSentence.concat('.');
+  		}
   		words[index] = endSentence
   	}
 	}
@@ -69,7 +101,4 @@ $(function() {
 			words[index + 1] = firstWord
 		}
 	}
-
-	generateSentences();
-
 });
