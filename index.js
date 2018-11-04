@@ -1,11 +1,10 @@
-// TODO - Sentences are too small (less than three words)
-// 			- Random capital letters
+// TODO - Sentences are too small (less than three words) Posibly caused by running out of words.
+//			- Double full stops
 
 $(function() {
   
-	var words = ['bake', 'banjaxed', 'banter', 'beezer', 'big lad', 'bout ye', 'catch yourself on,', 'cracker', 'craic', 'dander', 'dead on', 'eejit', 'faffin', 'fegs', 'grand', 'kex', 'melter', 'munter', 'mucker', 'offie', 'oul-doll', 'peelers', 'ratten', 'spuds', 'steamin', 'wee', 'what about ye,', 'wind yer neck in,', 'ats me nai', 'buck eejit', 'gurn', 'yoke', 'foundered', 'quare stretch in the evenings hi,', 'whats the craic', 'yer da sells avon', 'yer mas your da', 'swall', 'you know yourself,', 'sucking diesel', 'boyo', 'chancer', 'culchie', 'gaff', 'keep er lit,' , 'uppa hoods'];
-
 	$("#generate").click(function() {
+		var words = ['bake', 'banjaxed', 'banter', 'beezer', 'big lad', 'bout ye', 'catch yourself on,', 'cracker', 'craic', 'dander', 'dead on', 'eejit', 'faffin', 'fegs', 'grand', 'kex', 'melter', 'munter', 'mucker', 'offie', 'oul-doll', 'peelers', 'ratten', 'spuds', 'steamin', 'wee', 'what about ye,', 'wind yer neck in,', 'ats me nai', 'buck eejit', 'gurn', 'yoke', 'foundered', 'quare stretch in the evenings hi,', 'whats the craic', 'yer da sells avon', 'yer mas your da', 'swall', 'you know yourself,', 'sucking diesel', 'boyo', 'chancer', 'culchie', 'gaff', 'keep er lit,' , 'uppa hoods'];
 		var paragraphs = $("#paragraphs").val();
 		
 		// Max of 10 paragraphs
@@ -20,7 +19,7 @@ $(function() {
 
 
 		for (var i = 0; i < paragraphs; i++) {
-			generateParagraph();
+			generateParagraph(words);
 		}
 	});
 
@@ -31,13 +30,13 @@ $(function() {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	function randomizeArray() {
+	function randomizeArray(words) {
 		words.sort(function() { return 0.5 - Math.random() });
 	}
 
-	function generateParagraph() {
+	function generateParagraph(words) {
 		var index = 0;
-		randomizeArray();
+		randomizeArray(words);
 
 		// Add grammar to each sentence
 		for (i = 0; i < words.length; i += sentenceLength) {
@@ -45,7 +44,9 @@ $(function() {
     	var sentenceLength = getSentenceLength();
     	var index = index + sentenceLength;
 
-    	// Add grammar
+    	var difference = words.length - index;
+
+    	// Add grammar    	
     	addFullStops(words, index);
     	addCapitalLetters(words, index);
     	    	
@@ -93,7 +94,7 @@ $(function() {
   			endSentence = endSentence.replace(',', '.');  // Change to regex
   		}
   		else {
-  			endsentence = endSentence.concat('.');
+  			endSentence = endSentence.concat('.');
   		}
   		words[index] = endSentence
   	}
@@ -101,15 +102,17 @@ $(function() {
 
 	function addCapitalLetters(words, index) {
 		// Add capital letter to first word
+    
 		var firstWord = words[0].toString(); 
-    	firstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
-    	words[0] = firstWord;
+  	firstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+  	words[0] = firstWord;
 
     // Add capital letter to start of each sentence.
 		if (index + 1 < words.length) {
 			firstWord = words[index + 1].toString();
 			firstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
 			words[index + 1] = firstWord
+
 		}
 	}
 });
