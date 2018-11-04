@@ -3,22 +3,50 @@
 <head>
 <title>Norn Iron Ipsum</title>
 <link rel="stylesheet" href="assets/index.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<img src="assets/cranes.jpg" class="background">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1>Norn Iron Ipsum</h1>
+			<div class="row">
+				<p>Generate Lorem Ipsum placeholder text with a Norn Iron twist. <br> Just hit the wee button to generate the text.</p>
+			</div>
+			<div class="row">
+				<p> Paragraphs: 
+					<input type="number" id="paragraphs" value="3">
+				</p>
+			</div>
+			<div class="row">
+				<button type="button" class="btn btn-primary" id="generate">Generate</button>
+			</div>
+			<div class="row">
+				
+				<div class="display-none" id="output"></div>
+			</div>
+			<div class="row">
+				<button type="button" class="btn btn-primary display-none" id="copy">Copy to clipboard</button>
+			</div>
+			<div class="row">
+				<img src="assets/bucky.gif" class="bucky display-none">
+			</div>
+			
+		</div>
+	</div>
 
-<h1>Norn Iron Ipsum</h1>
-<p>Generate random Lorem Ipsum placeholder text with a Norn Iron twist. Hit the wee button to generate the text.</p>
-Paragraphs: 
-<select id="paragraphs">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-</select>
-<button id='generate'> Generate </button>
-<div id='output'></div>
+	
+	
+</div>
+
+
+
 
 </body>
 </html>

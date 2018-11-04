@@ -1,12 +1,23 @@
+// TODO - Sentences are too small (less than three words)
+// 			- Random capital letters
+
 $(function() {
   
-	var words = ['bake', 'banjaxed', 'banter', 'beezer', 'big lad', 'bout ye', 'catch yourself on,', 'cracker', 'craic', 'dander', 'dead on', 'eejit', 'faffin', 'fegs', 'grand', 'kex', 'melter', 'munter', 'mucker', 'offie', 'oul-doll', 'peelers', 'ratten', 'spuds', 'steamin', 'wee', 'what about ye,', 'wind yer neck in,', 'ats me nai', 'buck eejit', 'gurn', 'yoke', 'foundered', 'quare stretch in the evenings hi,', 'whats the craic', 'yer da sells avon', 'yer mas your da', 'swall', 'you know yourself,', 'sucking diesel', 'boyo', 'chancer', 'culchie', 'gaff', 'keep er lit,'];
+	var words = ['bake', 'banjaxed', 'banter', 'beezer', 'big lad', 'bout ye', 'catch yourself on,', 'cracker', 'craic', 'dander', 'dead on', 'eejit', 'faffin', 'fegs', 'grand', 'kex', 'melter', 'munter', 'mucker', 'offie', 'oul-doll', 'peelers', 'ratten', 'spuds', 'steamin', 'wee', 'what about ye,', 'wind yer neck in,', 'ats me nai', 'buck eejit', 'gurn', 'yoke', 'foundered', 'quare stretch in the evenings hi,', 'whats the craic', 'yer da sells avon', 'yer mas your da', 'swall', 'you know yourself,', 'sucking diesel', 'boyo', 'chancer', 'culchie', 'gaff', 'keep er lit,' , 'uppa hoods'];
 
 	$("#generate").click(function() {
 		var paragraphs = $("#paragraphs").val();
+		
+		// Max of 10 paragraphs
+		if (paragraphs > 10) {
+			paragraphs = 10;
+		}
 
 		// Remove existing paragraphs
-		$('#output').empty();
+		$('#output').empty().removeClass("display-none");
+		$('#copy').removeClass("display-none");
+		$('.bucky').removeClass("display-none");
+
 
 		for (var i = 0; i < paragraphs; i++) {
 			generateParagraph();
