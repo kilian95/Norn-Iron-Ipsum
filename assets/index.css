@@ -47,3 +47,11 @@ h1 {
 .container {
 	margin-bottom: 30px;
 }
+
+@media only screen and (max-width: 1107px) {
+	.input-container {
+	  background-color: rgba(255, 255, 255, 0.9);
+	  padding: 10px;
+	  border-radius: 3px;
+	}
+}
